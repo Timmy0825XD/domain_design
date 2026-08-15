@@ -1,59 +1,58 @@
 [
-    {
-      "id": "alerta-001",
-      "viajeId": "viaje-001",
-      "senal": "parpadeo_prolongado",
-      "ubicacion": {
-        "latitud": 9.5697,
-        "longitud": -73.3419,
-        "descripcion": "Vía La Jagua de Ibirico - Chiriguaná"
-      },
-      "creadaEn": "2026-08-12T14:32:00Z",
-      "estado": {
-        "tipo": "moderada",
-        "recomendacion": "Hay una zona de descanso a 8 km, considera parar"
-      },
-      "senalesAdicionales": []
+  {
+    "id": "alerta-001",
+    "viajeId": "viaje-001",
+    "senal": "parpadeo_prolongado",
+    "ubicacion": {
+      "latitud": 9.5697,
+      "longitud": -73.3419,
+      "descripcion": "Vía La Jagua de Ibirico - Chiriguaná"
     },
-    {
-      "id": "alerta-002",
-      "viajeId": "viaje-001",
-      "senal": "bostezo_frecuente",
-      "ubicacion": { "latitud": 9.5810, "longitud": -73.3502 },
-      "creadaEn": "2026-08-12T15:10:00Z",
-      "estado": { "tipo": "leve" }
+    "creadaEn": "2026-08-12T14:32:00Z",
+    "estado": {
+      "tipo": "moderada",
+      "recomendacion": "Hay una zona de descanso a 8 km, considera parar"
     },
-    {
-      "id": "alerta-003",
-      "viajeId": "viaje-002",
-      "senal": "parpadeo_prolongado",
-      "ubicacion": {
-        "latitud": 10.4631,
-        "longitud": -73.2532,
-        "descripcion": "Autopista Ruta 45, kilómetro 30"
-      },
-      "creadaEn": "2026-08-13T02:15:00Z",
-      "estado": {
-        "tipo": "critica",
-        "accionTomada": "alerta_sonora_maxima",
-        "paradaSugerida": {
-          "latitud": 10.4708,
-          "longitud": -73.2601,
-          "descripcion": "Estación de servicio Terpel, km 33"
-        }
-      },
-      "senalesAdicionales": ["bostezo_frecuente"]
+    "senalesAdicionales": []
+  },
+  {
+    "id": "alerta-002",
+    "viajeId": "viaje-001",
+    "senal": "bostezo_frecuente",
+    "ubicacion": { "latitud": 9.581, "longitud": -73.3502 },
+    "creadaEn": "2026-08-12T15:10:00Z",
+    "estado": { "tipo": "leve" }
+  },
+  {
+    "id": "alerta-003",
+    "viajeId": "viaje-002",
+    "senal": "parpadeo_prolongado",
+    "ubicacion": {
+      "latitud": 10.4631,
+      "longitud": -73.2532,
+      "descripcion": "Autopista Ruta 45, kilómetro 30"
     },
-    {
-      "id": "alerta-004",
-      "viajeId": "viaje-002",
-      "senal": "bostezo_frecuente",
-      "ubicacion": { "latitud": 10.4750, "longitud": -73.2610 },
-      "creadaEn": "2026-08-13T03:00:00Z",
-      "estado": {
-        "tipo": "descartada",
-        "motivo": "El conductor confirmó que ya estaba detenido en una parada de descanso"
+    "creadaEn": "2026-08-13T02:15:00Z",
+    "estado": {
+      "tipo": "critica",
+      "accionTomada": "alerta_sonora_maxima",
+      "paradaSugerida": {
+        "latitud": 10.4708,
+        "longitud": -73.2601,
+        "descripcion": "Estación de servicio Terpel, km 33"
       }
+    },
+    "senalesAdicionales": ["bostezo_frecuente"]
+  },
+  {
+    "id": "alerta-004",
+    "viajeId": "viaje-002",
+    "senal": "bostezo_frecuente",
+    "ubicacion": { "latitud": 10.475, "longitud": -73.261 },
+    "creadaEn": "2026-08-13T03:00:00Z",
+    "estado": {
+      "tipo": "descartada",
+      "motivo": "El conductor confirmó que ya estaba detenido en una parada de descanso"
     }
-  ]
-  
+  }
+]
