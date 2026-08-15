@@ -1,5 +1,7 @@
 # RutaViva · E02, dominio de alertas de fatiga
 
+[![CI](../../actions/workflows/ci.yml/badge.svg)](../../actions/workflows/ci.yml)
+
 RutaViva es un copiloto de carretera que cruza el estado de alerta del
 conductor con el clima, el tráfico y el tipo de vía para entregar una
 recomendación de seguridad, no una lista de datos sueltos. Este laboratorio
@@ -23,13 +25,7 @@ representa el concepto diferenciador del producto: cruzar una señal de
 fatiga con el contexto de la vía y convertirla en una única recomendación
 priorizada.
 
-Decisión: modelo escrito a mano, sin `freezed`. Con doce campos entre
-entidad, valor y estados, el costo de mantener `==`/`hashCode`/`copyWith` a
-mano todavía es bajo, y a cambio se conserva el mensaje de error de
-`CampoInvalido`, que dice exactamente qué campo del JSON falló. Esa
-ventaja importa más aquí que en un modelo con muchos más campos, porque los
-datos de fatiga van a venir eventualmente de la cámara y de una API, no solo
-de un archivo local controlado.
+Decisión: modelo con `freezed` para generar `==`, `hashCode`, `copyWith` y `toString`, manteniendo manual el JSON de `AlertaFatiga` y `EstadoAlerta` para conservar las validaciones mediante `CampoInvalido`.
 
 ## Cómo correrlo
 
@@ -59,4 +55,27 @@ lib/
       └─ data/
          └─ alertas_locales.dart  # hoy: JSON local. Después: API/Firestore.
 assets/data/alertas.json
+```
+# RutaViva · E02, dominio de alertas de fatiga
+
+[![CI](../../actions/workflows/ci.yml/badge.svg)](../../actions/workflows/ci.yml)
+
+RutaViva es un copiloto de carretera que analiza señales de fatiga del conductor y las relaciona con el contexto del viaje para generar una recomendación de seguridad.
+
+## El dominio
+
+* `AlertaFatiga` — entidad principal. Identidad: `id`.
+* `Ubicacion` — objeto de valor con coordenadas y descripción opcional.
+* `EstadoAlerta` — unión sellada: `Leve`, `Moderada`, `Critica` y `Descartada`.
+* `TipoSenal` — enum que clasifica la señal detectada.
+
+
+
+## Cómo correrlo
+
+```bash
+flutter pub get
+flutter analyze
+flutter test
+flutter run
 ```

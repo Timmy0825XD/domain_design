@@ -35,7 +35,11 @@ class AlertasLocales implements AlertasRepository {
     final decodificado = jsonDecode(crudo);
 
     if (decodificado is! List) {
-      throw const CampoInvalido('(raíz)', 'el archivo debe contener una lista', null);
+      throw const CampoInvalido(
+        '(raíz)',
+        'el archivo debe contener una lista',
+        null,
+      );
     }
 
     return _cache = decodificado

@@ -7,19 +7,24 @@ import 'package:domain_design/features/alertas/domain/tipo_senal.dart';
 import 'package:domain_design/features/alertas/domain/ubicacion.dart';
 import 'package:flutter_test/flutter_test.dart';
 
-AlertaFatiga ejemplo({EstadoAlerta? estado, List<String>? senalesAdicionales}) => AlertaFatiga(
-      id: 'alerta-001',
-      viajeId: 'viaje-001',
-      senal: TipoSenal.parpadeoProlongado,
-      ubicacion: const Ubicacion(
-        latitud: 9.5697,
-        longitud: -73.3419,
-        descripcion: 'Vía La Jagua de Ibirico - Chiriguaná',
-      ),
-      creadaEn: DateTime.utc(2026, 8, 12, 14, 32),
-      estado: estado ?? const Moderada('Hay una zona de descanso a 8 km, considera parar'),
-      senalesAdicionales: senalesAdicionales ?? const <String>[],
-    );
+AlertaFatiga ejemplo({
+  EstadoAlerta? estado,
+  List<String>? senalesAdicionales,
+}) => AlertaFatiga(
+  id: 'alerta-001',
+  viajeId: 'viaje-001',
+  senal: TipoSenal.parpadeoProlongado,
+  ubicacion: const Ubicacion(
+    latitud: 9.5697,
+    longitud: -73.3419,
+    descripcion: 'Vía La Jagua de Ibirico - Chiriguaná',
+  ),
+  creadaEn: DateTime.utc(2026, 8, 12, 14, 32),
+  estado:
+      estado ??
+      const Moderada('Hay una zona de descanso a 8 km, considera parar'),
+  senalesAdicionales: senalesAdicionales ?? const <String>[],
+);
 
 void main() {
   group('serialización', () {
@@ -39,25 +44,32 @@ void main() {
       // Pasa por TEXTO, no solo por Map: así también se prueba que fechas y
       // objetos anidados sobreviven a jsonEncode.
       final texto = jsonEncode(original.toJson());
-      final vuelta = AlertaFatiga.fromJson(jsonDecode(texto) as Map<String, dynamic>);
+      final vuelta = AlertaFatiga.fromJson(
+        jsonDecode(texto) as Map<String, dynamic>,
+      );
 
       expect(vuelta, equals(original));
     });
 
-    test('una ubicación sin descripción se lee como null, no como texto vacío', () {
-      final json = ejemplo().toJson();
-      (json['ubicacion'] as Map<String, dynamic>).remove('descripcion');
+    test(
+      'una ubicación sin descripción se lee como null, no como texto vacío',
+      () {
+        final json = ejemplo().toJson();
+        (json['ubicacion'] as Map<String, dynamic>).remove('descripcion');
 
-      final alerta = AlertaFatiga.fromJson(json);
-      expect(alerta.ubicacion.descripcion, isNull);
-    });
+        final alerta = AlertaFatiga.fromJson(json);
+        expect(alerta.ubicacion.descripcion, isNull);
+      },
+    );
 
     test('una alerta sin viajeId dice QUÉ campo falló, no solo que falló', () {
       final json = ejemplo().toJson()..remove('viajeId');
 
       expect(
         () => AlertaFatiga.fromJson(json),
-        throwsA(isA<CampoInvalido>().having((e) => e.campo, 'campo', 'viajeId')),
+        throwsA(
+          isA<CampoInvalido>().having((e) => e.campo, 'campo', 'viajeId'),
+        ),
       );
     });
 
@@ -103,13 +115,18 @@ void main() {
   group('reglas de negocio', () {
     test('una alerta en estado crítico requiere acción inmediata', () {
       expect(
-        ejemplo(estado: const Critica(accionTomada: 'alerta_sonora_maxima')).requiereAccionInmediata,
+        ejemplo(
+          estado: const Critica(accionTomada: 'alerta_sonora_maxima'),
+        ).requiereAccionInmediata,
         isTrue,
       );
     });
 
     test('una alerta descartada ya no se puede volver a descartar', () {
-      expect(ejemplo(estado: const Descartada('ya en descanso')).sePuedeDescartar, isFalse);
+      expect(
+        ejemplo(estado: const Descartada('ya en descanso')).sePuedeDescartar,
+        isFalse,
+      );
     });
 
     test('una alerta de hace 10 minutos tiene esa antigüedad exacta', () {

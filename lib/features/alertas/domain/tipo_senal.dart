@@ -12,13 +12,13 @@ enum TipoSenal {
   bostezoFrecuente;
 
   static TipoSenal fromJson(String valor) => switch (valor) {
-        'parpadeo_prolongado' => TipoSenal.parpadeoProlongado,
-        'bostezo_frecuente' => TipoSenal.bostezoFrecuente,
-        _ => throw CampoInvalido('senal', 'no es una señal conocida', valor),
-      };
+    'parpadeo_prolongado' => TipoSenal.parpadeoProlongado,
+    'bostezo_frecuente' => TipoSenal.bostezoFrecuente,
+    _ => throw CampoInvalido('senal', 'no es una señal conocida', valor),
+  };
 
   String toJson() => switch (this) {
-        TipoSenal.parpadeoProlongado => 'parpadeo_prolongado',
-        TipoSenal.bostezoFrecuente => 'bostezo_frecuente',
-      };
+    TipoSenal.parpadeoProlongado => 'parpadeo_prolongado',
+    TipoSenal.bostezoFrecuente => 'bostezo_frecuente',
+  };
 }
